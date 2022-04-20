@@ -170,12 +170,13 @@ if (!preg_match("/^([a-z0-9_-]+\.)*[a-z0-9_-]+@[a-z0-9_-]+(\.[a-z0-9_-]+)*\.[a-z
     // Генерируем уникальный логин и пароль.
     // TODO: сделать механизм генерации, например функциями rand(), uniquid(), md5(), substr().
     $pass = '';
-
-
-  for($length = 0; $length < 8; $length++) {
+  for($length = 0; $length < 6; $length++) {
     $pass .= chr(rand(32, 126));
   }
-    $login = '123';
+$login = '';
+for($length = 0; $length < 6; $length++) {
+    $login .= chr(rand(32, 126));
+  }
     // Сохраняем в Cookies.
     setcookie('login', $login);
     setcookie('pass', $pass);
