@@ -187,8 +187,10 @@ $pass = '3205407';
 $db = new PDO('mysql:host=localhost;dbname=u47590', $user, $pass, array(PDO::ATTR_PERSISTENT => true));
 
 try {
-  $stmt = $db->prepare("INSERT INTO app (name, email, year, sex, limbs, ability_immortality, ability_pass_thr_walls, ability_levitation, bio, checkbox ) 
-  VALUES (:name, :email, :year, :sex, :limbs, :imm, :walls, :lev, :bio, :checkbox)");
+  $stmt = $db->prepare("INSERT INTO app (login, password, name, email, year, sex, limbs, ability_immortality, ability_pass_thr_walls, ability_levitation, bio, checkbox ) 
+  VALUES (:login, :pass, :name, :email, :year, :sex, :limbs, :imm, :walls, :lev, :bio, :checkbox)");
+	$stmt -> bindParam(':pass', $pass);
+	$stmt -> bindParam(':login', $login);
   $stmt -> bindParam(':name', $name);
   $stmt -> bindParam(':email', $email);
   $stmt -> bindParam(':year', $year);
