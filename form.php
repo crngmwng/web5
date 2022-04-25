@@ -88,7 +88,6 @@ if (!empty($messages)) {
             С контрактом ознакомлен
         </label><br />
          <input type="submit" value="ok" />
-  <input type="submit" value="Выход" />
     </form>
 </body>
 </html>
