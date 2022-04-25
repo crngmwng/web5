@@ -21,15 +21,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     // Удаляем куку, указывая время устаревания в прошлом.
     setcookie('save', '', 100000);
     setcookie('login', '', 100000);
-    setcookie('pass', '', 100000);
+    setcookie('password', '', 100000);
     // Выводим сообщение пользователю.
     $messages[] = 'Спасибо, результаты сохранены.';
     // Если в куках есть пароль, то выводим сообщение.
-    if (!empty($_COOKIE['pass'])) {
+    if (!empty($_COOKIE['password'])) {
       $messages[] = sprintf('Вы можете <a href="login.php">войти</a> с логином <strong>%s</strong>
         и паролем <strong>%s</strong> для изменения данных.',
         strip_tags($_COOKIE['login']),
-        strip_tags($_COOKIE['pass']));
+        strip_tags($_COOKIE['password']));
     }
   }
 
@@ -79,7 +79,7 @@ $values['email'] = empty($_COOKIE['email_value']) ? '' : $_COOKIE['email_value']
 
   // Если нет предыдущих ошибок ввода, есть кука сессии, начали сессию и
   // ранее в сессию записан факт успешного логина.
-  if (empty($errors) && !empty($_COOKIE[session_name()]) &&
+  if (//empty($errors) && !empty($_COOKIE[session_name()]) &&
       session_start() && !empty($_SESSION['login'])) {
     // TODO: загрузить данные пользователя из БД
     // и заполнить переменную $values,
@@ -180,7 +180,7 @@ for($length = 0; $length < 6; $length++) {
   }
     // Сохраняем в Cookies.
     setcookie('login', $login);
-    setcookie('pass', $pass);
+    setcookie('pass', $password);
 
     // TODO: Сохранение данных формы, логина и хеш md5() пароля в базу данных.
     $user = 'u47590';
