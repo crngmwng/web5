@@ -180,7 +180,7 @@ for($length = 0; $length < 6; $length++) {
   }
     // Сохраняем в Cookies.
     setcookie('login', $login);
-    setcookie('pass', $password);
+    setcookie('password', $password);
 
     // TODO: Сохранение данных формы, логина и хеш md5() пароля в базу данных.
     $user = 'u47590';
