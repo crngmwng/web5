@@ -172,7 +172,7 @@ $db = new PDO('mysql:host=localhost;dbname=u47590', $user, $pass, array(PDO::ATT
 $login = $_POST['login'];
 try {
   $stmt = $db->prepare("UPDATE app SET ( name, email, year, sex, limbs, ability_immortality, ability_pass_thr_walls, ability_levitation, bio, checkbox ) 
-  VALUES (:login, :pass, :name, :email, :year, :sex, :limbs, :imm, :walls, :lev, :bio, :checkbox) WHERE login =:login");
+  VALUES ( :name, :email, :year, :sex, :limbs, :imm, :walls, :lev, :bio, :checkbox) WHERE login =:login");
 	$stmt -> bindParam(':login', $login);
   $stmt -> bindParam(':name', $name);
   $stmt -> bindParam(':email', $email);
