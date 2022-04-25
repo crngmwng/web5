@@ -85,6 +85,7 @@ $values['email'] = empty($_COOKIE['email_value']) ? '' : $_COOKIE['email_value']
     // и заполнить переменную $values,
     // предварительно санитизовав.
     printf('Вход с логином %s, uid %d', $_SESSION['login'], $_SESSION['uid']);
+	  $messages[] = sprintf(' <a href="login.php">Выйти</a>');
   }
 
   // Включаем содержимое файла form.php.
@@ -169,13 +170,13 @@ if (!preg_match("/^([a-z0-9_-]+\.)*[a-z0-9_-]+@[a-z0-9_-]+(\.[a-z0-9_-]+)*\.[a-z
   else {
     // Генерируем уникальный логин и пароль.
     // TODO: сделать механизм генерации, например функциями rand(), uniquid(), md5(), substr().
-    $pass = '';
+    $password = '';
   for($length = 0; $length < 6; $length++) {
-    $pass .= chr(rand(32, 126));
+    $password .= chr(rand(48, 122));
   }
 $login = '';
 for($length = 0; $length < 6; $length++) {
-    $login .= chr(rand(32, 126));
+    $login .= chr(rand(48, 122));
   }
     // Сохраняем в Cookies.
     setcookie('login', $login);
@@ -189,7 +190,7 @@ $db = new PDO('mysql:host=localhost;dbname=u47590', $user, $pass, array(PDO::ATT
 try {
   $stmt = $db->prepare("INSERT INTO app (login, password, name, email, year, sex, limbs, ability_immortality, ability_pass_thr_walls, ability_levitation, bio, checkbox ) 
   VALUES (:login, :pass, :name, :email, :year, :sex, :limbs, :imm, :walls, :lev, :bio, :checkbox)");
-	$stmt -> bindParam(':pass', $pass);
+	$stmt -> bindParam(':pass', $password);
 	$stmt -> bindParam(':login', $login);
   $stmt -> bindParam(':name', $name);
   $stmt -> bindParam(':email', $email);
