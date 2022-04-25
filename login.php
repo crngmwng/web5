@@ -57,7 +57,8 @@ $pass = '3205407';
   $password = ($_POST['pass']);
   
 $db = new PDO('mysql:host=localhost;dbname=u47590', $user, $pass, array(PDO::ATTR_PERSISTENT => true));
-  $stmt = $db->prepare("SELECT * FROM users WHERE login='$login' and password='$password'");
+  $stmt = $db->prepare("SELECT * FROM app WHERE login='$login' and password='$password'");
+  $stmt->execute();
 if($stmt->rowCount()>0){
   // Если все ок, то авторизуем пользователя.
   $_SESSION['login'] = $_POST['login'];
