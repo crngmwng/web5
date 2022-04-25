@@ -33,7 +33,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
    $errors['log_error'] = !empty($_COOKIE['log_error']);
   if ($errors['log_error']) {
     setcookie('log_error', '', 100000);
-    $messages[] = '<div class="error">Неверный логин или пароль</div>';
+    printf('Неверный логин и пароль. Попробуйте снова.');
   }
   
 ?>
