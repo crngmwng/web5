@@ -29,6 +29,11 @@ if (!empty($_SESSION['login'])) {
 // В суперглобальном массиве $_SERVER PHP сохраняет некторые заголовки запроса HTTP
 // и другие сведения о клиненте и сервере, например метод текущего запроса $_SERVER['REQUEST_METHOD'].
 if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+  if ($errors['log_error']) {
+    setcookie('log_error', '', 100000);
+    $messages[] = '<div class="error">Неверный логин или пароль</div>';
+  }
+  
 ?>
 
 <form action="" method="post">
@@ -44,7 +49,14 @@ else {
 
   // TODO: Проверть есть ли такой логин и пароль в базе данных.
   // Выдать сообщение об ошибках.
-
+  $user = 'u47590';
+$pass = '3205407';
+  $login = $_POST['login'];
+  $password = ($_POST['pass']);
+  
+$db = new PDO('mysql:host=localhost;dbname=u47590', $user, $pass, array(PDO::ATTR_PERSISTENT => true));
+  $stmt=$db->prepare("SELECT * FROM users WHERE login='$login" and password='$password);
+if($stmt->rowCount()>0){
   // Если все ок, то авторизуем пользователя.
   $_SESSION['login'] = $_POST['login'];
   // Записываем ID пользователя.
@@ -52,4 +64,14 @@ else {
 
   // Делаем перенаправление.
   header('Location: ./');
+}
+  else {
+    setcookie('log_error', '1', time()+24*60*60);
+  $errors = TRUE;
+  }
+  if ($errors) {
+    // При наличии ошибок перезагружаем страницу и завершаем работу скрипта.
+    header('Location: login.php');
+    exit();
+    }
 }
