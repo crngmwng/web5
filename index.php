@@ -79,7 +79,7 @@ $values['email'] = empty($_COOKIE['email_value']) ? '' : $_COOKIE['email_value']
 
   // Если нет предыдущих ошибок ввода, есть кука сессии, начали сессию и
   // ранее в сессию записан факт успешного логина.
-  if (//empty($errors) && !empty($_COOKIE[session_name()]) &&
+  if (empty($errors) && !empty($_COOKIE[session_name()]) &&
       session_start() && !empty($_SESSION['login'])) {
     // TODO: загрузить данные пользователя из БД
     // и заполнить переменную $values,
@@ -166,6 +166,50 @@ if (!preg_match("/^([a-z0-9_-]+\.)*[a-z0-9_-]+@[a-z0-9_-]+(\.[a-z0-9_-]+)*\.[a-z
       session_start() && !empty($_SESSION['login'])) {
     // TODO: перезаписать данные в БД новыми данными,
     // кроме логина и пароля.
+$user = 'u47590';
+$pass = '3205407';
+$db = new PDO('mysql:host=localhost;dbname=u47590', $user, $pass, array(PDO::ATTR_PERSISTENT => true));
+
+try {
+  $stmt = $db->prepare("UPDATE app SET ( name, email, year, sex, limbs, ability_immortality, ability_pass_thr_walls, ability_levitation, bio, checkbox ) 
+  VALUES (:login, :pass, :name, :email, :year, :sex, :limbs, :imm, :walls, :lev, :bio, :checkbox) WHERE login =:login");
+	$stmt -> bindParam(':pass', $password);
+	$stmt -> bindParam(':login', $login);
+  $stmt -> bindParam(':name', $name);
+  $stmt -> bindParam(':email', $email);
+  $stmt -> bindParam(':year', $year);
+  $stmt -> bindParam(':sex', $sex);
+  $stmt -> bindParam(':limbs', $limbs);
+  $stmt -> bindParam(':imm', $imm);
+  $stmt -> bindParam(':walls', $walls);
+  $stmt -> bindParam(':lev', $lev);
+  $stmt -> bindParam(':bio', $bio);
+  $stmt -> bindParam(':checkbox', $checkbox);
+
+  $name = $_POST['name'];
+  $email = $_POST['email'];
+  $year = $_POST['year'];
+  $sex = $_POST['radio-group-1'];
+  $limbs = $_POST['radio-group-2'];
+	
+   $imm = $_POST['power'];
+   $walls = $_POST['power'];
+   $lev = $_POST['power'];
+	
+  $bio = $_POST['bio'];
+
+  if (empty($_POST['check-1']))
+    $checkbox = "No";
+  else
+    $checkbox = $_POST['check-1'];
+
+  
+  $stmt -> execute();
+}
+catch(PDOException $e){
+  print('Error : ' . $e->getMessage());
+  exit();
+}
   }
   else {
     // Генерируем уникальный логин и пароль.
