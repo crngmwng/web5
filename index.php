@@ -74,7 +74,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
   $values = array();
  $values['name'] = empty($_COOKIE['name_value']) ? '' : $_COOKIE['name_value'];
 $values['email'] = empty($_COOKIE['email_value']) ? '' : $_COOKIE['email_value'];
-	$values['bio'] = empty($_COOKIE['bio_value']) ? '' : $_COOKIE['bio_value'];
+$values['bio'] = empty($_COOKIE['bio_value']) ? '' : $_COOKIE['bio_value'];
   // TODO: аналогично все поля.
 
   // Если нет предыдущих ошибок ввода, есть кука сессии, начали сессию и
@@ -161,6 +161,10 @@ if (!preg_match("/^([a-z0-9_-]+\.)*[a-z0-9_-]+@[a-z0-9_-]+(\.[a-z0-9_-]+)*\.[a-z
 	else {
     setcookie('bio_value', $_POST['bio'], time() + 30 * 24 * 60 * 60);
   }
+	setcookie('year_value',$_POST['year'], time()+30*24*60*60);
+	setcookie('sex_value',$_POST['radio-group-1'], time()+30*24*60*60);
+	setcookie('limbs_value',$_POST['radio-group-2'], time()+30*24*60*60);
+	setcookie('check_value',$_POST['check-1'], time()+30*24*60*60);
 
 // *************
 // TODO: тут необходимо проверить правильность заполнения всех остальных полей.
