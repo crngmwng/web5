@@ -171,10 +171,10 @@ $pass = '3205407';
 $db = new PDO('mysql:host=localhost;dbname=u47590', $user, $pass, array(PDO::ATTR_PERSISTENT => true));
 $login = $_POST['login'];
 try {
+	$login = $_SESSION['login'];
   $stmt = $db->prepare("UPDATE app SET name =:name, email=:email, year=:year, sex=:sex, limbs=:limbs,
-  ability_immortality=:imm, ability_pass_thr_walls=:walls, ability_levitation=:lev, bio=:bio, checkbox=:checkbox ) 
-   WHERE login =:login");
-	$stmt -> bindParam(':login', $login);
+  ability_immortality=:imm, ability_pass_thr_walls=:walls, ability_levitation=:lev, bio=:bio, checkbox=:checkbox WHERE login =:login");
+$stmt -> bindParam(':login', $login);
   $stmt -> bindParam(':name', $name);
   $stmt -> bindParam(':email', $email);
   $stmt -> bindParam(':year', $year);
