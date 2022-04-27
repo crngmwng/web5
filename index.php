@@ -84,9 +84,26 @@ $values['email'] = empty($_COOKIE['email_value']) ? '' : $_COOKIE['email_value']
     // TODO: загрузить данные пользователя из БД
     // и заполнить переменную $values,
     // предварительно санитизовав.
+	  $user = 'u47590';
+$pass = '3205407';
+$db = new PDO('mysql:host=localhost;dbname=u47590', $user, $pass, array(PDO::ATTR_PERSISTENT => true));
+try {
+	$login = $_SESSION['login'];
+ $stmt = $db->prepare("SELECT * FROM app WHERE login = '$login'");
+    $stmt->execute();
+    foreach ($stmt as $row) {
+      $values['name']=$row["name"];
+      $values['email'] = $row["email"];
+      $values['bio'] = $row["bio"];
+      }
+	}
     printf('Вход с логином %s, uid %d', $_SESSION['login'], $_SESSION['uid']);
 	  $messages[] = sprintf(' <a href="login.php">Выйти</a>');
   }
+catch(PDOException $e){
+  print('Error : ' . $e->getMessage());
+  exit();
+}
 
   // Включаем содержимое файла form.php.
   // В нем будут доступны переменные $messages, $errors и $values для вывода 
@@ -169,7 +186,6 @@ if (!preg_match("/^([a-z0-9_-]+\.)*[a-z0-9_-]+@[a-z0-9_-]+(\.[a-z0-9_-]+)*\.[a-z
 $user = 'u47590';
 $pass = '3205407';
 $db = new PDO('mysql:host=localhost;dbname=u47590', $user, $pass, array(PDO::ATTR_PERSISTENT => true));
-$login = $_POST['login'];
 try {
 	$login = $_SESSION['login'];
   $stmt = $db->prepare("UPDATE app SET name =:name, email=:email, year=:year, sex=:sex, limbs=:limbs,
