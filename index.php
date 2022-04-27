@@ -102,6 +102,12 @@ catch(PDOException $e){
   print('Error : ' . $e->getMessage());
   exit();
 }
+	  printf('Вход с логином %s', $_SESSION['login']);
+    $messages[] = sprintf('Вы можете <a href="login.php">выйти</a>');
+  }
+  else {
+    $messages[] = sprintf('Вы можете <a href="login.php">войти</a> если уже зарегистрированы');
+  }
 
   // Включаем содержимое файла form.php.
   // В нем будут доступны переменные $messages, $errors и $values для вывода 
