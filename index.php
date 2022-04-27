@@ -88,7 +88,7 @@ $values['email'] = empty($_COOKIE['email_value']) ? '' : $_COOKIE['email_value']
 $pass = '3205407';
 $db = new PDO('mysql:host=localhost;dbname=u47590', $user, $pass, array(PDO::ATTR_PERSISTENT => true));
 try {
-	$login = $_SESSION['login'];
+ $login = $_SESSION['login'];
  $stmt = $db->prepare("SELECT * FROM app WHERE login = '$login'");
     $stmt->execute();
     foreach ($stmt as $row) {
@@ -96,10 +96,8 @@ try {
       $values['email'] = $row["email"];
       $values['bio'] = $row["bio"];
       }
-	}
-    printf('Вход с логином %s, uid %d', $_SESSION['login'], $_SESSION['uid']);
-	  $messages[] = sprintf(' <a href="login.php">Выйти</a>');
-  }
+}
+   
 catch(PDOException $e){
   print('Error : ' . $e->getMessage());
   exit();
