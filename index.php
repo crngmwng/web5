@@ -76,9 +76,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 	$values['email'] = empty($_COOKIE['email_value']) ? '' : $_COOKIE['email_value'];
 	$values['bio'] = empty($_COOKIE['bio_value']) ? '' : $_COOKIE['bio_value'];
 	$values['year'] = empty($_COOKIE['year_value']) ? '' : $_COOKIE['year_value'];
-	$values['sex'] = empty($_COOKIE['sex_value']) ? '' : $_COOKIE['sex_value'];
-	$values['limbs'] = empty($_COOKIE['limbs_value']) ? '' : $_COOKIE['limbs_value'];
-	$values['check'] = empty($_COOKIE['check_value']) ? '' : $_COOKIE['check_value'];
+	$values['radio-group-1'] = empty($_COOKIE['sex_value']) ? '' : $_COOKIE['sex_value'];
+	$values['radio-group-2'] = empty($_COOKIE['limbs_value']) ? '' : $_COOKIE['limbs_value'];
+	$values['check-1'] = empty($_COOKIE['check_value']) ? '' : $_COOKIE['check_value'];
 	
   // TODO: аналогично все поля.
 
@@ -101,9 +101,9 @@ try {
       $values['email'] = $row["email"];
       $values['bio'] = $row["bio"];
 	$values['year']=$row["year"];
-	$values['sex']=$row["sex"];
-	$values['limbs']=$row["limbs"];
-	$values['check']=$row["checkbox"];
+	$values['radio-group-1']=$row["sex"];
+	$values['radio-group-2']=$row["limbs"];
+	$values['check-1']=$row["checkbox"];
       }
 }
    
