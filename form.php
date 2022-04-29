@@ -51,7 +51,7 @@ if (!empty($messages)) {
         </label><br />
         Количество конечностей: <br />
         <label>
-            <input type="radio" checked="checked"
+            <input type="radio" 
                    name="radio-group-2" value="1" 
                    <?php if($values['radio-group-2']=="1") {print 'checked';} ?>/>
             1
@@ -63,7 +63,7 @@ if (!empty($messages)) {
             2
         </label>
         <label>
-            <input type="radio" checked="checked"
+            <input type="radio" 
                    name="radio-group-2" value="3"  
                    <?php if($values['radio-group-2']=="3") {print 'checked';} ?>/>
             3
@@ -86,9 +86,9 @@ if (!empty($messages)) {
         </label><br />
         <label>
            Биография:<br />
-            <textarea name="bio"> <?php if ($errors['bio_empty']) {print 'class="error"';} ?> value="<?php print $values['bio']; ?>"</textarea>
+            <textarea name="bio" value="<?php print $values['bio']; ?>"> <?php if ($errors['bio_empty']) {print 'class="error"';} ?> value="<?php print $values['bio']; ?>"</textarea>
         </label><br />
-        <label><input type="checkbox" checked="checked" name="check-1" <?php if(!empty($values['check-1'])){print 'checked';} ?> />
+        <label><input type="checkbox" checked="checked" name="check-1" <?php if($values['check']==TRUE){print 'checked';} ?> />
             С контрактом ознакомлен
         </label><br />
          <input type="submit" value="ok"  />
