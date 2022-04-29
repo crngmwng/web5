@@ -86,7 +86,7 @@ if (!empty($messages)) {
         </label><br />
         <label>
            Биография:<br />
-            <textarea name="bio" value="<?php print $values['bio']; ?>"> <?php if ($errors['bio_empty']) {print 'class="error"';} ?> value="<?php print $values['bio']; ?>"</textarea>
+            <textarea name="bio" value="<?php print $values['bio']; ?>"> <?php if ($errors['bio_empty']) {print 'class="error"';} ?> </textarea>
         </label><br />
         <label><input type="checkbox"  name="check-1" <?php if($values['check-1']==TRUE){print 'checked';} ?> />
             С контрактом ознакомлен
