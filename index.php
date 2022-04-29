@@ -76,7 +76,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 	$values['email'] = empty($_COOKIE['email_value']) ? '' : $_COOKIE['email_value'];
 	$values['bio'] = empty($_COOKIE['bio_value']) ? '' : $_COOKIE['bio_value'];
 	$values['year'] = empty($_COOKIE['year_value']) ? '' : $_COOKIE['year_value'];
-	$values['radio-group-1'] = empty($_COOKIE['sex_value']) ? '' : $_COOKIE['sex_value'];
+	$values['radio-group-1'] = empty($_COOKIE['sex_value']) ? '' : strip_tags($_COOKIE['sex_value']);
 	$values['radio-group-2'] = empty($_COOKIE['limbs_value']) ? '' : $_COOKIE['limbs_value'];
 	$values['check-1'] = empty($_COOKIE['check_value']) ? '' : $_COOKIE['check_value'];
 	
