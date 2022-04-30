@@ -39,12 +39,17 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 	$errors['name_wrong'] = !empty($_COOKIE['name_err']);
 	$errors['email'] = !empty($_COOKIE['email_error']);
 	$errors['email_empty'] = !empty($_COOKIE['email_empty']);
+	$errors['year_empty'] = !empty($_COOKIE['year_empty']);
+	$errors['sex_empty'] = !empty($_COOKIE['sex_empty']);
+	$errors['limbs_empty'] = !empty($_COOKIE['limbs_empty']);
+	$errors['power_empty'] = !empty($_COOKIE['power_empty']);
 	$errors['bio_empty'] = !empty($_COOKIE['bio_empty']);
+	$errors['check_empty'] = !empty($_COOKIE['check_empty']);
 
   // TODO: аналогично все поля.
 
   // Выдаем сообщения об ошибках.
-  if ($errors['name_empty']) {
+  	if ($errors['name_empty']) {
     // Удаляем куку, указывая время устаревания в прошлом.
     setcookie('name_error', '', 100000);
     // Выводим сообщение.
@@ -55,7 +60,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     $messages[] = '<div class="error">Заполните имя правильно.</div>';
   }
 	
-  if ($errors['email']) {
+ 	 if ($errors['email']) {
     setcookie('email_error', '', 100000);
     $messages[] = '<div class="error">Введите корректный email.</div>';
   }
@@ -66,6 +71,26 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 	if($errors['bio_empty']) {
 	setcookie('bio_empty', '', 100000);
     $messages[] = '<div class="error">Введите биографию.</div>';
+	}
+	if($errors['year_empty']) {
+	setcookie('year_empty', '', 100000);
+    $messages[] = '<div class="error">Введите год.</div>';
+	}
+	if($errors['sex_empty']) {
+	setcookie('sex_empty', '', 100000);
+    $messages[] = '<div class="error">Введите пол.</div>';
+	}
+	if($errors['limbs_empty']) {
+	setcookie('limbs_empty', '', 100000);
+    $messages[] = '<div class="error">Введите количество конечностей.</div>';
+	}
+	if($errors['power_empty']) {
+	setcookie('power_empty', '', 100000);
+    $messages[] = '<div class="error">Введите свехспособности.</div>';
+	}
+	if($errors['check_empty']) {
+	setcookie('check_empty', '', 100000);
+    $messages[] = '<div class="error">Поставьте галочку.</div>';
 	}
   // TODO: тут выдать сообщения об ошибках в других полях.
 
@@ -78,6 +103,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 	$values['year'] = empty($_COOKIE['year_value']) ? '' : $_COOKIE['year_value'];
 	$values['radio-group-1'] = empty($_COOKIE['sex_value']) ? '' : strip_tags($_COOKIE['sex_value']);
 	$values['radio-group-2'] = empty($_COOKIE['limbs_value']) ? '' : $_COOKIE['limbs_value'];
+	$values['power'] = empty($_COOKIE['power_value']) ? '' : $_COOKIE['power_value'];
 	$values['check-1'] = empty($_COOKIE['check_value']) ? '' : $_COOKIE['check_value'];
 	
   // TODO: аналогично все поля.
@@ -160,6 +186,37 @@ if (!preg_match("/^([a-z0-9_-]+\.)*[a-z0-9_-]+@[a-z0-9_-]+(\.[a-z0-9_-]+)*\.[a-z
 	else {
     setcookie('email_value', $_POST['email'], time() + 30 * 24 * 60 * 60);
   }
+if (empty($_POST['year'])) {
+ setcookie('year_empty', '1', time()+24*60*60);
+  $errors = TRUE;
+}
+	else {
+    setcookie('year_value', $_POST['year'], time() + 30 * 24 * 60 * 60);
+  }
+
+	if (empty($_POST['radio-group-1'])) {
+ setcookie('sex_empty', '1', time()+24*60*60);
+  $errors = TRUE;
+}
+	else {
+    setcookie('sex_value', $_POST['radio-group-1'], time() + 30 * 24 * 60 * 60);
+  }
+
+	if (empty($_POST['radio-group-2'])) {
+ setcookie('limbs_empty', '1', time()+24*60*60);
+  $errors = TRUE;
+}
+	else {
+    setcookie('limbs_value', $_POST['radio-group-2'], time() + 30 * 24 * 60 * 60);
+  }
+
+	if (empty($_POST['power'])) {
+ setcookie('power_empty', '1', time()+24*60*60);
+  $errors = TRUE;
+}
+	else {
+    setcookie('power_value', $_POST['power'], time() + 30 * 24 * 60 * 60);
+  }
 
 
 
@@ -170,10 +227,14 @@ if (!preg_match("/^([a-z0-9_-]+\.)*[a-z0-9_-]+@[a-z0-9_-]+(\.[a-z0-9_-]+)*\.[a-z
 	else {
     setcookie('bio_value', $_POST['bio'], time() + 30 * 24 * 60 * 60);
   }
-	setcookie('year_value',$_POST['year'], time()+30*24*60*60);
-	setcookie('sex_value',$_POST['radio-group-1'], time()+30*24*60*60);
-	setcookie('limbs_value',$_POST['radio-group-2'], time()+30*24*60*60);
-	setcookie('check_value',$_POST['check-1'], time()+30*24*60*60);
+	
+	if (empty($_POST['check-1'])) {
+ setcookie('check_empty', '1', time()+24*60*60);
+  $errors = TRUE;
+}
+	else {
+    setcookie('check_value', $_POST['check-1'], time() + 30 * 24 * 60 * 60);
+  }
 
 // *************
 // TODO: тут необходимо проверить правильность заполнения всех остальных полей.
@@ -192,6 +253,11 @@ if (!preg_match("/^([a-z0-9_-]+\.)*[a-z0-9_-]+@[a-z0-9_-]+(\.[a-z0-9_-]+)*\.[a-z
 	setcookie('name_err', '', 100000);
 	  setcookie('email_empty', '', 100000);
 	  setcookie('bio_empty', '', 100000);
+	  setcookie('year_empty', '', 100000);
+	  setcookie('sex_empty', '', 100000);
+	  setcookie('limbs_empty', '', 100000);
+	  setcookie('power_empty', '', 100000);
+	  setcookie('check_empty', '', 100000);
     // TODO: тут необходимо удалить остальные Cookies.
   }
 
