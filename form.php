@@ -40,7 +40,7 @@ if (!empty($messages)) {
         </script>
         Пол:
         <label>
-            <input type="radio" checked="checked"
+            <input type="radio" 
                    name="radio-group-1" value="m" <?php if($values['radio-group-1']=="m") {print 'checked';} ?> />
             Муж
         </label>
@@ -80,8 +80,8 @@ if (!empty($messages)) {
             <select name="power"
                     multiple="multiple">
                 <option value="immortality">Бессмертие</option>
-                <option value="pass_thr_walls" selected="selected">Прохождение сквозь стены</option>
-                <option value="levitation" selected="selected">Левитация</option>
+                <option value="pass_thr_walls">Прохождение сквозь стены</option>
+                <option value="levitation" >Левитация</option>
             </select>
         </label><br />
         <label>
