@@ -67,7 +67,7 @@ $db = new PDO('mysql:host=localhost;dbname=u47590', $user, $pass, array(PDO::ATT
     $pas=$row["password"];
   }
 
-  if ($count && password_verify('$password', $pas))
+  if ($count && password_verify('$password', $pas)){
   // Если все ок, то авторизуем пользователя.
   $_SESSION['login'] = $_POST['login'];
   // Записываем ID пользователя.
