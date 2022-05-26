@@ -61,13 +61,11 @@ $db = new PDO('mysql:host=localhost;dbname=u47590', $user, $pass, array(PDO::ATT
   $stmt -> bindParam(':login', $login);
   $stmt->execute();
   $count = 0;
-  $pas='';
   foreach ($stmt as $row) {
     $count = 1;
-    $pas=$row["password"];
   }
 
-  if ($count && password_verify('$password', $pas)){
+  if ($count){
   // Если все ок, то авторизуем пользователя.
   $_SESSION['login'] = $_POST['login'];
   // Записываем ID пользователя.
