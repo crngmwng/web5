@@ -57,8 +57,9 @@ $pass = '3205407';
   $password = ($_POST['pass']);
   
 $db = new PDO('mysql:host=localhost;dbname=u47590', $user, $pass, array(PDO::ATTR_PERSISTENT => true));
-  $stmt = $db->prepare("SELECT * FROM app WHERE login=:login");
+  $stmt = $db->prepare("SELECT * FROM app WHERE login=:login and password =:password");
   $stmt -> bindParam(':login', $login);
+  $stmt -> bindParam(':password', $password);
   $stmt->execute();
   $count = 0;
   foreach ($stmt as $row) {
